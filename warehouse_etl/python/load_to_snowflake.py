@@ -45,11 +45,13 @@ def get_connection():
 
 def run_ddl(conn) -> None:
     ddl = DDL_PATH.read_text(encoding="utf-8")
-    # Splitting on ";" is safe here: the file has no string literals containing
-    # ";" and its one multi-line trailing comment (the example query) contains
-    # exactly one ";", so it collapses to a single chunk starting with "--"
-    # that the filter below drops.
-    statements = [s.strip() for s in ddl.split(";") if s.strip() and not s.strip().startswith("--")]
+    # Strip full-line comments first, THEN split on ";". Splitting first and
+    # filtering out chunks that "start with --" is wrong whenever a comment
+    # block is immediately followed by real SQL before the next ";" -- the
+    # whole chunk (comment + SQL) starts with "--" and the SQL silently gets
+    # dropped with it. (This previously ate the CREATE DATABASE statement.)
+    sql_only = "\n".join(line for line in ddl.splitlines() if not line.strip().startswith("--"))
+    statements = [s.strip() for s in sql_only.split(";") if s.strip()]
     cur = conn.cursor()
     for stmt in statements:
         first_line = stmt.splitlines()[0][:80]
