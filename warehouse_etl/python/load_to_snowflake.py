@@ -36,6 +36,10 @@ def get_connection():
         user=os.environ["SNOWFLAKE_USER"],
         password=os.environ["SNOWFLAKE_PASSWORD"],
         warehouse=os.environ["SNOWFLAKE_WAREHOUSE"],
+        # ACCOUNTADMIN is the role every new trial account's first user holds,
+        # and CREATE DATABASE requires it (or SYSADMIN with the right grants).
+        # Override with SNOWFLAKE_ROLE if your account uses a different setup.
+        role=os.environ.get("SNOWFLAKE_ROLE", "ACCOUNTADMIN"),
     )
 
 
