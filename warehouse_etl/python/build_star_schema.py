@@ -57,7 +57,11 @@ def build_dim_date(min_date: str, max_date: str) -> pd.DataFrame:
     dates = pd.date_range(min_date, max_date, freq="D")
     return pd.DataFrame({
         "date_key": dates.strftime("%Y%m%d").astype(int),
-        "full_date": dates,
+        # Plain datetime.date objects (not pandas Timestamps) -- Snowflake's
+        # write_pandas/COPY INTO can't auto-cast a raw Timestamp's underlying
+        # epoch-microseconds representation into a DATE column, but a plain
+        # date object maps cleanly.
+        "full_date": dates.date,
         "year": dates.year,
         "month": dates.month,
         "month_name": dates.strftime("%B"),
