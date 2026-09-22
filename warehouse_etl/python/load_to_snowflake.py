@@ -93,13 +93,13 @@ def main() -> None:
         cur = conn.cursor()
         cur.execute(
             """
-            SELECT d.year, d.month_name, COUNT(DISTINCT f.order_id) AS orders,
+            SELECT d.year, d.month, d.month_name, COUNT(DISTINCT f.order_id) AS orders,
                    ROUND(SUM(f.price + f.freight_value), 2) AS revenue
             FROM ORDER_OPS_WAREHOUSE.ANALYTICS.fact_order_items f
             JOIN ORDER_OPS_WAREHOUSE.ANALYTICS.dim_date d ON d.date_key = f.date_key
             WHERE f.order_status NOT IN ('canceled', 'unavailable')
-            GROUP BY d.year, d.month_name
-            ORDER BY d.year, MONTH(d.full_date)
+            GROUP BY d.year, d.month, d.month_name
+            ORDER BY d.year, d.month
             LIMIT 5
             """
         )
