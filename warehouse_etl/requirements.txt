@@ -1,0 +1,5 @@
+pandas
+sqlalchemy
+psycopg2-binary
+pyarrow>=14.0.1,<24
+snowflake-connector-python

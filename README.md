@@ -22,6 +22,7 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 | Real analytical case study | [`docs/case_study.md`](docs/case_study.md) — business question → findings → quantified revenue impact → recommendations |
 | Live dashboard link | **[whatsapp-order-ops-analytics.streamlit.app](https://whatsapp-order-ops-analytics.streamlit.app)** — interactive Streamlit + Plotly app ([`streamlit_app/app.py`](streamlit_app/app.py)), including a live revenue-at-risk what-if calculator |
 | *Bonus:* Conversational AI / NLP intent classification / chatbot performance tracking | [`nlp_chatbot_analytics/`](nlp_chatbot_analytics/) — real TF-IDF + Logistic Regression classifier (96.1% held-out accuracy, 0.913 macro F1) on 9,795 real customer-support conversations, plus a live "Chatbot Analytics" page in the Streamlit app |
+| *Bonus:* Data warehouse concepts (Snowflake) / automated ETL | [`warehouse_etl/`](warehouse_etl/) — real automated ETL pipeline: extracts from PostgreSQL, models a proper star schema (4 dimension tables + 1 fact table), loads into a live Snowflake warehouse |
 | Proof of work | This repo — real data, real queries, real dashboard, all reproducible from a fresh clone |
 
 ## Data source
@@ -40,6 +41,7 @@ streamlit_app/     app.py, pages/1_Chatbot_Analytics.py, requirements.txt (live 
 reports/           eda_report.md + figures/ (auto-generated)
 docs/              case_study.md
 nlp_chatbot_analytics/  bonus module: conversational AI / intent classification (see its own README)
+warehouse_etl/     bonus module: automated ETL -> Snowflake star schema (see its own README)
 ```
 
 ## Reproducing this locally
@@ -66,6 +68,10 @@ Full report with charts: [`reports/eda_report.md`](reports/eda_report.md)
 ## Bonus: Conversational AI / Chatbot Performance Analytics
 
 [`nlp_chatbot_analytics/`](nlp_chatbot_analytics/) is a self-contained module analyzing 9,795 real customer-support conversations. A **TF-IDF + Logistic Regression intent classifier** (trained on weak-supervision labels, evaluated on held-out data) reaches **96.1% accuracy / 0.913 macro F1** across 7 intent classes, and drives a live "Chatbot Analytics" page in the [Streamlit dashboard](https://whatsapp-order-ops-analytics.streamlit.app) tracking escalation rate and turns-to-resolution by intent and by brand. Full write-up: [`nlp_chatbot_analytics/README.md`](nlp_chatbot_analytics/README.md).
+
+## Bonus: Data Warehouse / Automated ETL (Snowflake)
+
+[`warehouse_etl/`](warehouse_etl/) extracts the order-ops data from PostgreSQL, models it as a proper **star schema** (dimension tables for customer/product/seller/date + a fact table at the order-line-item grain — not just a copy of the source tables), and loads it into a live **Snowflake** data warehouse via an automated Python pipeline. Full write-up: [`warehouse_etl/README.md`](warehouse_etl/README.md).
 
 ## Notes on the Power BI file
 
