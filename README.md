@@ -6,7 +6,7 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 
 **Start here:** [`docs/case_study.md`](docs/case_study.md) — a narrative write-up of the analysis (business question → findings → quantified revenue impact → recommendations), not just raw output.
 
-**Live dashboard:** [Deploy on Streamlit Community Cloud](https://share.streamlit.io) pointing at `streamlit_app/app.py` in this repo → link it here once deployed.
+**Live dashboard:** [whatsapp-order-ops-analytics.streamlit.app](https://whatsapp-order-ops-analytics.streamlit.app) — interactive, includes a live revenue-at-risk what-if calculator.
 
 ## Skills demonstrated → where to find them
 
@@ -20,7 +20,7 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 | Descriptive statistics, metric definitions, anomaly detection | Pearson correlation + ANOVA in the EDA report; regional SLA-breach anomaly detection in SQL Q8 |
 | Excel / spreadsheet modeling | [`excel/financial_ops_model.xlsx`](excel/financial_ops_model.xlsx) — live formulas (TREND() forecast, revenue-at-risk what-if model) |
 | Real analytical case study | [`docs/case_study.md`](docs/case_study.md) — business question → findings → quantified revenue impact → recommendations |
-| Live dashboard link | [`streamlit_app/app.py`](streamlit_app/app.py) — interactive Streamlit + Plotly app, including a live revenue-at-risk what-if calculator |
+| Live dashboard link | **[whatsapp-order-ops-analytics.streamlit.app](https://whatsapp-order-ops-analytics.streamlit.app)** — interactive Streamlit + Plotly app ([`streamlit_app/app.py`](streamlit_app/app.py)), including a live revenue-at-risk what-if calculator |
 | Proof of work | This repo — real data, real queries, real dashboard, all reproducible from a fresh clone |
 
 ## Data source
