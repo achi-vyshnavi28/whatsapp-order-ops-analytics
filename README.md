@@ -6,6 +6,8 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 
 **Start here:** [`docs/case_study.md`](docs/case_study.md) — a narrative write-up of the analysis (business question → findings → quantified revenue impact → recommendations), not just raw output.
 
+**Live dashboard:** [Deploy on Streamlit Community Cloud](https://share.streamlit.io) pointing at `streamlit_app/app.py` in this repo → link it here once deployed.
+
 ## Skills demonstrated → where to find them
 
 | Skill | Where |
@@ -18,6 +20,7 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 | Descriptive statistics, metric definitions, anomaly detection | Pearson correlation + ANOVA in the EDA report; regional SLA-breach anomaly detection in SQL Q8 |
 | Excel / spreadsheet modeling | [`excel/financial_ops_model.xlsx`](excel/financial_ops_model.xlsx) — live formulas (TREND() forecast, revenue-at-risk what-if model) |
 | Real analytical case study | [`docs/case_study.md`](docs/case_study.md) — business question → findings → quantified revenue impact → recommendations |
+| Live dashboard link | [`streamlit_app/app.py`](streamlit_app/app.py) — interactive Streamlit + Plotly app, including a live revenue-at-risk what-if calculator |
 | Proof of work | This repo — real data, real queries, real dashboard, all reproducible from a fresh clone |
 
 ## Data source
@@ -32,7 +35,9 @@ sql/               01_schema.sql (DDL) + 02_analysis_queries.sql (analysis)
 python/            load_data.py, eda_analysis.py, build_excel_model.py
 excel/             financial_ops_model.xlsx
 dashboard/         order_ops_dashboard.pbix
+streamlit_app/     app.py, requirements.txt (live interactive dashboard)
 reports/           eda_report.md + figures/ (auto-generated)
+docs/              case_study.md
 ```
 
 ## Reproducing this locally
