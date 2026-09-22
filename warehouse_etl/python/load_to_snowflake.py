@@ -52,6 +52,8 @@ def run_ddl(conn) -> None:
     statements = [s.strip() for s in ddl.split(";") if s.strip() and not s.strip().startswith("--")]
     cur = conn.cursor()
     for stmt in statements:
+        first_line = stmt.splitlines()[0][:80]
+        print(f"  -> {first_line}")
         cur.execute(stmt)
     cur.close()
 
@@ -72,6 +74,12 @@ def load_table(conn, name: str) -> int:
 def main() -> None:
     conn = get_connection()
     try:
+        diag = conn.cursor()
+        diag.execute("SELECT CURRENT_ROLE(), CURRENT_WAREHOUSE(), CURRENT_USER()")
+        role, warehouse, user = diag.fetchone()
+        diag.close()
+        print(f"Connected as user={user}  role={role}  warehouse={warehouse}")
+
         print("Creating database/schema/tables...")
         run_ddl(conn)
 
