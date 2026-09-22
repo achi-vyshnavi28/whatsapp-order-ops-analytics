@@ -71,7 +71,7 @@ Full report with charts: [`reports/eda_report.md`](reports/eda_report.md)
 
 ## Bonus: Data Warehouse / Automated ETL (Snowflake)
 
-[`warehouse_etl/`](warehouse_etl/) extracts the order-ops data from PostgreSQL, models it as a proper **star schema** (dimension tables for customer/product/seller/date + a fact table at the order-line-item grain — not just a copy of the source tables), and loads it into a live **Snowflake** data warehouse via an automated Python pipeline. Full write-up: [`warehouse_etl/README.md`](warehouse_etl/README.md).
+[`warehouse_etl/`](warehouse_etl/) extracts the order-ops data from PostgreSQL, models it as a proper **star schema** (dimension tables for customer/product/seller/date + a fact table at the order-line-item grain — not just a copy of the source tables), and loads it into a live **Snowflake** data warehouse via an automated Python pipeline. Confirmed working end-to-end: all 99,441 orders / 112,650 line items loaded and verified with a live analytical query. Full write-up: [`warehouse_etl/README.md`](warehouse_etl/README.md).
 
 ## Notes on the Power BI file
 
