@@ -77,7 +77,7 @@ Full report with charts: [`reports/eda_report.md`](reports/eda_report.md)
 
 ## Bonus: NoSQL / Document Database (MongoDB)
 
-[`nosql_mongo/`](nosql_mongo/) remodels the same order data a third way: as **denormalized documents** (one per order, with line items/payments/review embedded inline) loaded into a live **MongoDB Atlas** cluster. Demonstrates real document-database querying — `find` filters, and aggregation pipelines using `$group`, `$sort`, and `$unwind` over embedded arrays — not just a data dump. Full write-up: [`nosql_mongo/README.md`](nosql_mongo/README.md).
+[`nosql_mongo/`](nosql_mongo/) remodels the same order data a third way: as **denormalized documents** (one per order, with line items/payments/review embedded inline) loaded into a live **MongoDB Atlas** cluster. Demonstrates real document-database querying — `find` filters, and aggregation pipelines using `$group`, `$sort`, and `$unwind` over embedded arrays — not just a data dump. Confirmed working end-to-end: all 99,441 documents loaded, with an 8.1% late-delivery rate matching the PostgreSQL and Snowflake versions of this same analysis exactly. Full write-up: [`nosql_mongo/README.md`](nosql_mongo/README.md).
 
 ## Notes on the Power BI file
 
