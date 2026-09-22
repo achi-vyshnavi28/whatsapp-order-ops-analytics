@@ -23,6 +23,7 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 | Live dashboard link | **[whatsapp-order-ops-analytics.streamlit.app](https://whatsapp-order-ops-analytics.streamlit.app)** — interactive Streamlit + Plotly app ([`streamlit_app/app.py`](streamlit_app/app.py)), including a live revenue-at-risk what-if calculator |
 | *Bonus:* Conversational AI / NLP intent classification / chatbot performance tracking | [`nlp_chatbot_analytics/`](nlp_chatbot_analytics/) — real TF-IDF + Logistic Regression classifier (96.1% held-out accuracy, 0.913 macro F1) on 9,795 real customer-support conversations, plus a live "Chatbot Analytics" page in the Streamlit app |
 | *Bonus:* Data warehouse concepts (Snowflake) / automated ETL | [`warehouse_etl/`](warehouse_etl/) — real automated ETL pipeline: extracts from PostgreSQL, models a proper star schema (4 dimension tables + 1 fact table), loads into a live Snowflake warehouse |
+| *Bonus:* NoSQL / document databases (MongoDB) | [`nosql_mongo/`](nosql_mongo/) — same order data remodeled as denormalized documents (embedded items/payments/reviews) in a live MongoDB Atlas cluster, queried with `find` + aggregation pipelines (`$unwind`, `$group`) |
 | Proof of work | This repo — real data, real queries, real dashboard, all reproducible from a fresh clone |
 
 ## Data source
@@ -42,6 +43,7 @@ reports/           eda_report.md + figures/ (auto-generated)
 docs/              case_study.md
 nlp_chatbot_analytics/  bonus module: conversational AI / intent classification (see its own README)
 warehouse_etl/     bonus module: automated ETL -> Snowflake star schema (see its own README)
+nosql_mongo/       bonus module: document modeling -> MongoDB Atlas (see its own README)
 ```
 
 ## Reproducing this locally
@@ -72,6 +74,10 @@ Full report with charts: [`reports/eda_report.md`](reports/eda_report.md)
 ## Bonus: Data Warehouse / Automated ETL (Snowflake)
 
 [`warehouse_etl/`](warehouse_etl/) extracts the order-ops data from PostgreSQL, models it as a proper **star schema** (dimension tables for customer/product/seller/date + a fact table at the order-line-item grain — not just a copy of the source tables), and loads it into a live **Snowflake** data warehouse via an automated Python pipeline. Confirmed working end-to-end: all 99,441 orders / 112,650 line items loaded and verified with a live analytical query. Full write-up: [`warehouse_etl/README.md`](warehouse_etl/README.md).
+
+## Bonus: NoSQL / Document Database (MongoDB)
+
+[`nosql_mongo/`](nosql_mongo/) remodels the same order data a third way: as **denormalized documents** (one per order, with line items/payments/review embedded inline) loaded into a live **MongoDB Atlas** cluster. Demonstrates real document-database querying — `find` filters, and aggregation pipelines using `$group`, `$sort`, and `$unwind` over embedded arrays — not just a data dump. Full write-up: [`nosql_mongo/README.md`](nosql_mongo/README.md).
 
 ## Notes on the Power BI file
 
