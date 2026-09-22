@@ -1,6 +1,6 @@
 # whatsapp-order-ops-analytics
 
-A merchant order-operations analytics project built to demonstrate a **Data Analyst (SQL, Python & Business Intelligence)** skill set: complex SQL, Python EDA + automated reporting, Excel financial modeling, and a live Power BI dashboard — applied to a WhatsApp-first SMB order platform's core problem of turning conversational order and delivery data into operational intelligence for small merchants.
+A merchant order-operations analytics project built to demonstrate a **Data Analyst (SQL, Python & Business Intelligence)** skill set: complex SQL, Python EDA + automated reporting, Excel financial modeling, a live Power BI dashboard, and (as a bonus) real NLP intent classification on customer-support conversations — applied to a WhatsApp-first SMB order platform's core problem of turning conversational order and delivery data into operational intelligence for small merchants.
 
 **Why this dataset:** a WhatsApp-first order platform needs to turn conversational order + delivery data into operational intelligence for small merchants. [Olist](https://olist.com) solves a structurally identical problem — it connects small/medium merchants to marketplaces and coordinates fulfillment and delivery on their behalf. Its public dataset (100k+ real, anonymized Brazilian e-commerce orders, 2016–2018) is used here as a stand-in for that kind of merchant-order-delivery data, so every query and chart in this repo answers a question that business would actually ask.
 
@@ -21,6 +21,7 @@ A merchant order-operations analytics project built to demonstrate a **Data Anal
 | Excel / spreadsheet modeling | [`excel/financial_ops_model.xlsx`](excel/financial_ops_model.xlsx) — live formulas (TREND() forecast, revenue-at-risk what-if model) |
 | Real analytical case study | [`docs/case_study.md`](docs/case_study.md) — business question → findings → quantified revenue impact → recommendations |
 | Live dashboard link | **[whatsapp-order-ops-analytics.streamlit.app](https://whatsapp-order-ops-analytics.streamlit.app)** — interactive Streamlit + Plotly app ([`streamlit_app/app.py`](streamlit_app/app.py)), including a live revenue-at-risk what-if calculator |
+| *Bonus:* Conversational AI / NLP intent classification / chatbot performance tracking | [`nlp_chatbot_analytics/`](nlp_chatbot_analytics/) — real TF-IDF + Logistic Regression classifier (96.1% held-out accuracy, 0.913 macro F1) on 9,795 real customer-support conversations, plus a live "Chatbot Analytics" page in the Streamlit app |
 | Proof of work | This repo — real data, real queries, real dashboard, all reproducible from a fresh clone |
 
 ## Data source
@@ -35,9 +36,10 @@ sql/               01_schema.sql (DDL) + 02_analysis_queries.sql (analysis)
 python/            load_data.py, eda_analysis.py, build_excel_model.py
 excel/             financial_ops_model.xlsx
 dashboard/         order_ops_dashboard.pbix
-streamlit_app/     app.py, requirements.txt (live interactive dashboard)
+streamlit_app/     app.py, pages/1_Chatbot_Analytics.py, requirements.txt (live interactive dashboard)
 reports/           eda_report.md + figures/ (auto-generated)
 docs/              case_study.md
+nlp_chatbot_analytics/  bonus module: conversational AI / intent classification (see its own README)
 ```
 
 ## Reproducing this locally
@@ -60,6 +62,10 @@ docs/              case_study.md
 - **Data-quality gaps found and documented, not silently patched**: 623 products carry a category name with no English translation mapping; 8 "delivered" orders are missing a delivery timestamp. Both are called out explicitly in the generated report.
 
 Full report with charts: [`reports/eda_report.md`](reports/eda_report.md)
+
+## Bonus: Conversational AI / Chatbot Performance Analytics
+
+[`nlp_chatbot_analytics/`](nlp_chatbot_analytics/) is a self-contained module analyzing 9,795 real customer-support conversations. A **TF-IDF + Logistic Regression intent classifier** (trained on weak-supervision labels, evaluated on held-out data) reaches **96.1% accuracy / 0.913 macro F1** across 7 intent classes, and drives a live "Chatbot Analytics" page in the [Streamlit dashboard](https://whatsapp-order-ops-analytics.streamlit.app) tracking escalation rate and turns-to-resolution by intent and by brand. Full write-up: [`nlp_chatbot_analytics/README.md`](nlp_chatbot_analytics/README.md).
 
 ## Notes on the Power BI file
 
